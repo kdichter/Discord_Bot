@@ -1,5 +1,7 @@
 # Discord_Bots
-Discord bot vibe coding with Claude AI.
+A Discord bot that tracks your active window usage. 
+
+Automatically logs which applications you're using and for how long, storing the data in a Supabase database.
 
 # Discord Application Tracker Setup
 
@@ -40,28 +42,30 @@ CREATE INDEX idx_session_date ON app_usage(session_date);
     * Message Content Intent
     * Presence Intent (if you want to track Discord usage)
 5. Copy your bot token
-    1. Go to Discord Developer Portal
-    2. Click on your application (the one you created)
-    3. Click "**Bot**" in the left sidebar
-    4. Under the bot's username, you'll see a section called "**TOKEN**"
-    5. Click "**Reset Token**" (if it's your first time) or "**Copy**" if the token is already visible
-    6. Copy this token and save it somewhere safe (you'll paste it into your ```.env``` file later) <br/>
-        ⚠️ Keep this secret! Don't share it with anyone or post it publicly
-6. Invite bot to your server using OAuth2 URL Generator:
+1. Go to Discord Developer Portal
+2. Click on your application (the one you created)
+3. Click "**Bot**" in the left sidebar
+4. Under the bot's username, you'll see a section called "**TOKEN**"
+5. Click "**Reset Token**" (if it's your first time) or "**Copy**" if the token is already visible
+6. Copy this token and save it somewhere safe (you'll paste it into your ```.env``` file later) <br/>
+
+    ⚠️ Keep this secret! Don't share it with anyone or post it publicly
+   
+7. Invite bot to your server using OAuth2 URL Generator:
     1. Still in the [Discord Developer Portal](https://discord.com/developers/applications), click "OAuth2" in the left sidebar
     2. Click "URL Generator" (it's a sub-menu under OAuth2)
     3. In the SCOPES section, check the box for: </br>
-        ✅ bot </br>
+        * bot </br>
     4. A new **BOT PERMISSIONS** section will appear below
-    5. In the BOT **PERMISSIONS** section, check these boxes: </br>
-        ✅ Send Messages </br>
-        ✅ Read Messages/View Channels (might be called "**View Channels**") </br>
+    5. In the **BOT PERMISSIONS** section, check these boxes: </br>
+        * Send Messages </br>
+        * Read Messages/View Channels (might be called "**View Channels**") </br>
     6. At the very bottom, you'll see a **GENERATED URL**
     7. Copy that URL and paste it into your web browser
     8. Select which server you want to add the bot to (you need to be an admin of that server)
     9. Click "**Authorize**" </br>
     
-    Your bot should now appear in your server (it'll be offline until you run the Python script).
+    `Your bot should now appear in your server` (it'll be offline until you run the Python script).
 
 ## 4. Create .env File
 Create a ```.env``` file in your project directory:
@@ -70,10 +74,26 @@ DISCORD_TOKEN=your_discord_bot_token_here
 SUPABASE_URL=your_supabase_url_here
 SUPABASE_KEY=your_supabase_anon_key_here
 ```
+## 5. Customize Tracked Applications
+
+Edit `TRACKED_APPS` in `curr_tracker_bot.py` to add/remove applications:
+```python
+TRACKED_APPS = {
+    # Browsers
+    "chrome.exe",
+    "firefox.exe",
+    # Development
+    "Code.exe",
+    "pycharm64.exe",
+    # Add your apps here
+}
+```
 ## 5. Run the Bot
 ```
 python bot.py
 ```
+You should see: `BotName is now tracking active windows!`
+
 ## 6. Using the Bot
 Once running, use these Discord commands:
 
