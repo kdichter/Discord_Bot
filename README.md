@@ -1,13 +1,22 @@
-# Discord_Bots
+# Current_App_Tracker_Bot
 A Discord bot that tracks your active window usage. 
 
 Automatically logs which applications you're using and for how long, storing the data in a Supabase database.
 
-# Discord Application Tracker Setup
+## Features
+
+- Tracks only the **active/focused window** (not all running apps)
+- **Auto-detects Steam games** without manual configuration
+- **Grace period**: Brief switches (under 2 minutes) continue the same session
+- **Discord commands** to view usage statistics
+- **Supabase database** for persistent storage
+- **Shutdown handling**: Logs current session when the bot closes
+
+# Setup
 
 ## 1. Install Dependencies
 ```
-bashpip install -r requirements.txt
+pip install -r requirements.txt
 ```
 ## 2. Setup Supabase (Free Database)
 1. Go to [supabase.com](https://supabase.com) and create a free account
@@ -48,10 +57,7 @@ CREATE INDEX idx_session_date ON app_usage(session_date);
 4. Under the bot's username, you'll see a section called "**TOKEN**"
 5. Click "**Reset Token**" (if it's your first time) or "**Copy**" if the token is already visible
 6. Copy this token and save it somewhere safe (you'll paste it into your ```.env``` file later) <br/>
-
-    ⚠️ Keep this secret! Don't share it with anyone or post it publicly
-   
-7. Invite bot to your server using OAuth2 URL Generator:
+7. Invite the bot to your server using OAuth2 URL Generator:
     1. Still in the [Discord Developer Portal](https://discord.com/developers/applications), click "OAuth2" in the left sidebar
     2. Click "URL Generator" (it's a sub-menu under OAuth2)
     3. In the SCOPES section, check the box for: </br>
