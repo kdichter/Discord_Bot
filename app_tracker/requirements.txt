@@ -1,4 +1,0 @@
-discord.py
-psutil
-supabase
-python-dotenv
